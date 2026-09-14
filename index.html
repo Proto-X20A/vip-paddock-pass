@@ -298,20 +298,22 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
     }
 
     .cake-container {
       position: relative;
       width: 200px;
-      height: 150px;
-      margin-top: 15px;
+      height: 160px;
+      margin: 15px auto 0 auto;
       cursor: pointer;
     }
 
     .cake-tier-bottom {
       position: absolute;
       bottom: 0;
-      left: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 180px;
       height: 60px;
       background: linear-gradient(to bottom, #FFF, var(--cake-pink));
@@ -331,7 +333,8 @@
     .cake-tier-top {
       position: absolute;
       bottom: 55px;
-      left: 35px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 130px;
       height: 50px;
       background: linear-gradient(to bottom, #FFF, #FFE4E1);
@@ -345,17 +348,19 @@
       top: -10px;
       width: 100%;
       display: flex;
-      justify-space: around;
+      justify-content: space-around;
       font-size: 0.8rem;
     }
 
     .candles-group {
       position: absolute;
       bottom: 102px;
-      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 22px;
+      z-index: 5;
     }
 
     .candle {
@@ -374,20 +379,62 @@
       border: 1px solid var(--gold-accent);
     }
 
+    /* Candle Wick */
+    .wick {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 6px;
+      background: #333;
+      border-radius: 1px;
+    }
+
+    /* Upgraded Realistic Flame */
     .flame {
       position: absolute;
-      top: -18px;
-      width: 14px;
-      height: 20px;
-      background: radial-gradient(ellipse at bottom, #FFD700 0%, #FF4500 70%);
-      border-radius: 50% 50% 20% 20%;
-      animation: flicker 0.2s infinite alternate;
-      box-shadow: 0 0 12px #FFD700, 0 0 22px #FF4500;
-      transition: opacity 0.4s ease;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 24px;
+      background: radial-gradient(ellipse at 50% 80%, #FFFFFF 0%, #FFF494 20%, #FFB700 45%, #FF4500 80%, transparent 100%);
+      border-radius: 50% 50% 35% 35%;
+      box-shadow: 0 0 12px #FFD700, 0 0 24px #FF4500, 0 0 36px rgba(255, 69, 0, 0.6);
+      animation: flameFlicker 0.15s infinite alternate ease-in-out;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* Inner Blue Flame Core */
+    .flame::after {
+      content: '';
+      position: absolute;
+      bottom: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 8px;
+      background: radial-gradient(circle, #87CEFA 30%, #0000FF 90%);
+      border-radius: 50%;
+      opacity: 0.85;
     }
 
     .flame.extinguished {
       opacity: 0;
+      transform: translateX(-50%) scale(0.2);
+    }
+
+    @keyframes flameFlicker {
+      0% {
+        transform: translateX(-50%) scale(1) rotate(-1deg);
+        box-shadow: 0 0 12px #FFD700, 0 0 24px #FF4500, 0 0 36px rgba(255, 69, 0, 0.6);
+      }
+      100% {
+        transform: translateX(-50%) scale(1.08, 0.95) rotate(1.5deg);
+        box-shadow: 0 0 15px #FFE033, 0 0 28px #FF5722, 0 0 42px rgba(255, 87, 34, 0.7);
+      }
     }
 
     .cake-instruction {
@@ -823,8 +870,16 @@
         <div class="cake-container" id="cake-container">
           <div class="sparkles">✨ 💖 ✨</div>
           <div class="candles-group">
-            <div class="candle">2<div class="flame" id="flame-1"></div></div>
-            <div class="candle">1<div class="flame" id="flame-2"></div></div>
+            <div class="candle">
+              <div class="wick"></div>
+              2
+              <div class="flame" id="flame-1"></div>
+            </div>
+            <div class="candle">
+              <div class="wick"></div>
+              1
+              <div class="flame" id="flame-2"></div>
+            </div>
           </div>
           <div class="cake-tier-top"><div class="drip-layer"></div></div>
           <div class="cake-tier-bottom"><div class="drip-layer"></div></div>
