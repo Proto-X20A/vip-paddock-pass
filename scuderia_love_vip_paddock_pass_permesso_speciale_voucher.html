@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Permesso Speciale VIP — 21st Birthday Paddock Pass</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti & html2canvas CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    :root {
+      --rosso-corsa: #CC0000;
+      --burgundy: #8B1A1A;
+      --gold-accent: #D4AF37;
+      --gold-bright: #F9D423;
+      --rose-gold: #DDA7A5;
+      --blush-pink: #FFF0F3;
+      --fancy-pink: #FF8DA1;
+      --satin-pink: #FFB6C1;
+      --deep-pink: #E65C7B;
+      --warm-ivory: #FFFDF9;
+      --espresso: #4A3B32;
+      --dark-carbon: #121212;
+      --white-pure: #FFFFFF;
+      --cake-pink: #FFB7C5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at center, #FFFFFF 0%, #F4F1EA 100%);
+      color: var(--dark-carbon);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Sakura / Heart Background Canvas */
+    #sakura-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.65;
+    }
+
+    .app-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 900px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-screen {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .hidden {
+      display: none !important;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    /* --- SCREEN 1: PADDOCK PASS LANDING --- */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-header h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      letter-spacing: 4px;
+      color: var(--gold-accent);
+      text-transform: uppercase;
+    }
+
+    .hero-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--dark-carbon);
+      margin-top: 5px;
+      font-style: italic;
+    }
+
+    .pass-perspective-wrapper {
+      perspective: 1200px;
+      margin: 15px 0;
+      cursor: pointer;
+    }
+
+    .paddock-pass-card {
+      width: 320px;
+      height: 490px;
+      background: #FFFFFF;
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(212, 175, 55, 0.3);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+    }
+
+    .paddock-pass-card:hover {
+      box-shadow: 0 30px 60px rgba(204, 0, 0, 0.2), 0 0 25px rgba(212, 175, 55, 0.4);
+    }
+
+    .grommet-hole {
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #888 30%, #333 70%);
+      border-radius: 50%;
+      margin: 12px auto 4px auto;
+      border: 3px solid #ccc;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .card-top-banner {
+      background: var(--rosso-corsa);
+      color: var(--white-pure);
+      text-align: center;
+      padding: 10px 0;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      position: relative;
+    }
+
+    .card-top-banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #009246 33%, #ffffff 33%, #ffffff 66%, #ce2b37 66%);
+    }
+
+    .pass-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .guest-photo-frame {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid var(--gold-accent);
+      padding: 4px;
+      background: #FFF5EE;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .guest-initials {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--rosso-corsa);
+    }
+
+    .guest-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark-carbon);
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+
+    .access-tag {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold-accent);
+      color: #8B6508;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .credential-details {
+      width: 100%;
+      border-top: 1px dashed #DDD;
+      border-bottom: 1px dashed #DDD;
+      padding: 10px 0;
+      margin: 8px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      color: #666;
+    }
+
+    .detail-row span:last-child {
+      font-weight: 700;
+      color: var(--dark-carbon);
+    }
+
+    .barcode-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .fake-barcode {
+      width: 80%;
+      height: 22px;
+      background: repeating-linear-gradient(90deg, #181818, #181818 2px, #fff 2px, #fff 4px, #181818 4px, #181818 7px);
+    }
+
+    .barcode-num {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: #888;
+    }
+
+    .start-btn {
+      margin-top: 20px;
+      background: linear-gradient(135deg, var(--rosso-corsa) 0%, #A00000 100%);
+      color: var(--white-pure);
+      border: none;
+      padding: 16px 40px;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(204, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 15px 30px rgba(204, 0, 0, 0.4);
+    }
+
+    /* --- SCREEN 2: CELEBRATION & CAKE --- */
+    .celebration-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .cake-section {
+      margin-bottom: 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cake-container {
+      position: relative;
+      width: 200px;
+      height: 150px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    .cake-tier-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      width: 180px;
+      height: 60px;
+      background: linear-gradient(to bottom, #FFF, var(--cake-pink));
+      border-radius: 18px 18px 8px 8px;
+      box-shadow: 0 10px 20px rgba(255, 183, 197, 0.4), inset 0 6px 0 #FFF;
+      border: 2px solid #FFD1DC;
+    }
+
+    .drip-layer {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 18px;
+      background: repeating-radial-gradient(circle at 10px 0px, #FFF 0, #FFF 10px, transparent 11px);
+    }
+
+    .cake-tier-top {
+      position: absolute;
+      bottom: 55px;
+      left: 35px;
+      width: 130px;
+      height: 50px;
+      background: linear-gradient(to bottom, #FFF, #FFE4E1);
+      border-radius: 16px 16px 8px 8px;
+      box-shadow: inset 0 5px 0 #FFF;
+      border: 2px solid #FFD1DC;
+    }
+
+    .sparkles {
+      position: absolute;
+      top: -10px;
+      width: 100%;
+      display: flex;
+      justify-space: around;
+      font-size: 0.8rem;
+    }
+
+    .candles-group {
+      position: absolute;
+      bottom: 102px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .candle {
+      position: relative;
+      width: 26px;
+      height: 38px;
+      background: repeating-linear-gradient(45deg, var(--gold-accent), var(--gold-accent) 6px, #FFF 6px, #FFF 12px);
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #5A4300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      border: 1px solid var(--gold-accent);
+    }
+
+    .flame {
+      position: absolute;
+      top: -18px;
+      width: 14px;
+      height: 20px;
+      background: radial-gradient(ellipse at bottom, #FFD700 0%, #FF4500 70%);
+      border-radius: 50% 50% 20% 20%;
+      animation: flicker 0.2s infinite alternate;
+      box-shadow: 0 0 12px #FFD700, 0 0 22px #FF4500;
+      transition: opacity 0.4s ease;
+    }
+
+    .flame.extinguished {
+      opacity: 0;
+    }
+
+    .cake-instruction {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 8px;
+      font-style: italic;
+      transition: opacity 0.3s ease;
+    }
+
+    .wish-reveal-msg {
+      margin-top: 12px;
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.2rem;
+      color: var(--burgundy);
+      text-shadow: 0 2px 10px rgba(221, 167, 165, 0.4);
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+
+    .wish-reveal-msg.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* --- CUTE IMPORTED IMAGES ART SCENE --- */
+    .imported-art-scene {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin: 15px 0 20px 0;
+      cursor: pointer;
+    }
+
+    .art-card {
+      width: 95px;
+      height: 95px;
+      border-radius: 20px;
+      background: #FFFFFF;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08), 0 0 0 2px rgba(221, 167, 165, 0.3);
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .bear-card {
+      animation: floatLeft 3.2s ease-in-out infinite alternate;
+    }
+
+    .gift-card {
+      width: 110px;
+      height: 110px;
+      border-radius: 24px;
+      box-shadow: 0 15px 30px rgba(204, 0, 0, 0.15), 0 0 0 3px rgba(212, 175, 55, 0.5);
+      animation: pulseGift 2.2s ease-in-out infinite;
+    }
+
+    .roses-card {
+      animation: floatRight 3.2s ease-in-out 0.4s infinite alternate;
+    }
+
+    .imported-art-scene:hover .art-card {
+      transform: scale(1.08);
+    }
+
+    @keyframes floatLeft {
+      0% { transform: translateY(0) rotate(-3deg); }
+      100% { transform: translateY(-8deg) rotate(3deg); }
+    }
+
+    @keyframes floatRight {
+      0% { transform: translateY(0) rotate(3deg); }
+      100% { transform: translateY(-8deg) rotate(-3deg); }
+    }
+
+    @keyframes pulseGift {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06) translateY(-4deg); }
+    }
+
+    /* VOUCHER CARD DESIGN */
+    .voucher-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--warm-ivory);
+      border: 2px solid var(--rose-gold);
+      border-radius: 16px;
+      padding: 30px 25px 25px 25px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.08), inset 0 0 60px rgba(221, 167, 165, 0.1);
+      position: relative;
+      overflow: hidden;
+      margin-top: 5px;
+      color: var(--espresso);
+    }
+
+    .voucher-card::before {
+      content: '♡';
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 15rem;
+      color: rgba(221, 167, 165, 0.08);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .vip-badge-header {
+      display: inline-block;
+      color: var(--rose-gold);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .voucher-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .voucher-header h3 {
+      font-family: 'Alex Brush', cursive;
+      color: var(--burgundy);
+      font-size: 3.2rem;
+      line-height: 1;
+      font-weight: 400;
+      margin-bottom: 5px;
+      text-shadow: 1px 1px 2px rgba(139, 26, 26, 0.1);
+    }
+
+    .voucher-header p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--espresso);
+      opacity: 0.85;
+    }
+
+    .voucher-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border: 1px dashed #D3C5C5;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .option-item:hover {
+      border-color: var(--rose-gold);
+      background: var(--white-pure);
+      transform: translateX(4px);
+    }
+
+    .option-item.selected {
+      border: 1px solid var(--rose-gold);
+      background: var(--blush-pink);
+      box-shadow: 0 4px 12px rgba(221, 167, 165, 0.2);
+    }
+
+    .option-item input[type="radio"] {
+      accent-color: var(--burgundy);
+      margin-right: 12px;
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+
+    .option-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--espresso);
+      flex: 1;
+    }
+
+    /* Dynamic Custom Wish Field */
+    .custom-wish-container {
+      display: none;
+      width: 100%;
+      margin-top: 4px;
+      padding-left: 28px;
+    }
+
+    .custom-wish-container.visible {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6deg); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .custom-wish-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--rose-gold);
+      border-radius: 8px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.98rem;
+      background: #FFFFFF;
+      color: var(--burgundy);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .custom-wish-input:focus {
+      outline: none;
+      border-color: var(--burgundy);
+      box-shadow: 0 0 0 3px rgba(139, 26, 26, 0.15);
+    }
+
+    .stamp-btn {
+      width: 100%;
+      background: var(--burgundy);
+      color: var(--warm-ivory);
+      border: none;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(139, 26, 26, 0.2);
+    }
+
+    .stamp-btn:hover {
+      background: #731515;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(139, 26, 26, 0.3);
+    }
+
+    /* Wax Seal Stamp Design */
+    .stamp-seal {
+      position: absolute;
+      bottom: 25px;
+      right: 20px;
+      transform: rotate(-12deg) scale(2.5);
+      width: 105px;
+      height: 105px;
+      background: radial-gradient(circle at 30% 30%, #A52A2A, #8B0000, #5C0000);
+      border-radius: 50%;
+      color: rgba(255,255,255,0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -4px 8px rgba(0,0,0,0.4);
+      border: 2px solid #5C0000;
+      filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.2));
+      z-index: 10;
+    }
+
+    .stamp-seal::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px dashed rgba(255,255,255,0.4);
+      border-radius: 50%;
+    }
+
+    .stamp-seal.stamped {
+      opacity: 1;
+      transform: rotate(-12deg) scale(1);
+    }
+
+    .stamp-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin: 2px 0;
+      font-style: italic;
+    }
+
+    .stamp-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.45rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    /* INSTRUCTIONS & REDEMPTION CONTAINER */
+    .post-claim-instructions {
+      width: 100%;
+      max-width: 440px;
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .instruction-card {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      text-align: left;
+    }
+
+    .instruction-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--rosso-corsa);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .instruction-card p {
+      font-size: 0.82rem;
+      color: #555;
+      line-height: 1.45;
+    }
+
+    .download-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--rosso-corsa) 0%, #A00000 100%);
+      color: var(--white-pure);
+      border: none;
+      padding: 14px 22px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 20px rgba(204, 0, 0, 0.25);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(204, 0, 0, 0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="sakura-canvas"></canvas>
+
+  <div class="app-container">
+
+    <!-- SCREEN 1: LANDING PASS -->
+    <div id="screen-landing" class="section-screen">
+      <div class="hero-header">
+        <h2>Scuderia Birthday Grand Prix</h2>
+        <h1>VIP Paddock Access</h1>
+      </div>
+
+      <div class="pass-perspective-wrapper" id="card-wrapper">
+        <div class="paddock-pass-card" id="paddock-card">
+          <div class="grommet-hole"></div>
+          <div class="card-top-banner">F1 PADDOCK CLUB</div>
+          <div class="pass-body">
+            <div class="guest-photo-frame"><div class="guest-initials">21</div></div>
+            <div>
+              <div class="guest-name">BIRTHDAY VIP GUEST</div>
+              <div class="access-tag">ALL AREAS ACCESS</div>
+            </div>
+            <div class="credential-details">
+              <div class="detail-row"><span>EVENT:</span><span>21ST BIRTHDAY GP</span></div>
+              <div class="detail-row"><span>DATE:</span><span>SEPTEMBER 16</span></div>
+              <div class="detail-row"><span>VIP HOST:</span><span>FILO DONOFRIO</span></div>
+            </div>
+            <div class="barcode-container">
+              <div class="fake-barcode"></div>
+              <div class="barcode-num">PASS NO: 2026-0916-21</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="start-btn" id="enter-paddock-btn">
+        <span>START ENGINE & ENTER</span> <span>🏎️</span>
+      </button>
+    </div>
+
+    <!-- SCREEN 2: CELEBRATION -->
+    <div id="screen-celebration" class="section-screen hidden">
+      <div class="cake-section">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--dark-carbon);">
+          Happy 21st Birthday, Amore Mio!
+        </h2>
+        <p class="cake-instruction" id="cake-instruction">Click the candles to blow out your birthday wish ✨</p>
+        
+        <div class="cake-container" id="cake-container">
+          <div class="sparkles">✨ 💖 ✨</div>
+          <div class="candles-group">
+            <div class="candle">2<div class="flame" id="flame-1"></div></div>
+            <div class="candle">1<div class="flame" id="flame-2"></div></div>
+          </div>
+          <div class="cake-tier-top"><div class="drip-layer"></div></div>
+          <div class="cake-tier-bottom"><div class="drip-layer"></div></div>
+        </div>
+
+        <div class="wish-reveal-msg" id="wish-reveal-msg">
+          May all your sweetest wishes come true, today & always... 💖
+        </div>
+      </div>
+
+      <!-- IMPORTED IMAGE SCENE -->
+      <div style="text-align: center;">
+        <p style="font-size: 0.85rem; font-weight: 700; color: var(--deep-pink); letter-spacing: 1px; margin-bottom: 6px;">
+          🎁 CLICK THE GIFT TO UNBOX YOUR VIP PERMIT
+        </p>
+      </div>
+
+      <div class="imported-art-scene" id="gift-box-trigger">
+        <div class="art-card bear-card">
+          <img src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=300&q=80" alt="Cute Teddy Bear" />
+        </div>
+        <div class="art-card gift-card">
+          <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=300&q=80" alt="Luxury Gift Box" />
+        </div>
+        <div class="art-card roses-card">
+          <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=300&q=80" alt="Rose Bouquet" />
+        </div>
+      </div>
+
+      <!-- VOUCHER CARD -->
+      <div class="voucher-card hidden" id="voucher-card">
+        <div style="text-align: center;">
+          <span class="vip-badge-header">A Special Gift For You</span>
+        </div>
+
+        <div class="voucher-header">
+          <h3>Permesso Speciale</h3>
+          <p>Your 21st Birthday Wish, Officially Granted.</p>
+        </div>
+
+        <div class="voucher-options">
+          <label class="option-item selected">
+            <input type="radio" name="voucher-choice" value="Your Favorite Snack" checked />
+            <span class="option-label">🍫 Your Favorite Snack</span>
+          </label>
+
+          <label class="option-item">
+            <input type="radio" name="voucher-choice" value="A Starbucks Drink" />
+            <span class="option-label">☕ A Starbucks Drink</span>
+          </label>
+
+          <label class="option-item">
+            <input type="radio" name="voucher-choice" value="A K-Pop Album" />
+            <span class="option-label">🎵 A K-Pop Album</span>
+          </label>
+
+          <label class="option-item" id="custom-option-wrapper">
+            <input type="radio" name="voucher-choice" value="Custom Wish" id="custom-wish-radio" />
+            <span class="option-label">✍️ Something Else...</span>
+          </label>
+
+          <!-- Dynamic Input Container -->
+          <div class="custom-wish-container" id="custom-wish-container">
+            <input type="text" id="custom-wish-text" class="custom-wish-input" placeholder="Type your special birthday wish here..." />
+          </div>
+        </div>
+
+        <button class="stamp-btn" id="stamp-claim-btn">
+          SEAL & CLAIM VOUCHER
+        </button>
+
+        <div class="stamp-seal" id="stamp-seal">
+          <div class="stamp-sub">SEALED WITH</div>
+          <div class="stamp-title">LOVE</div>
+          <div class="stamp-sub">OFFICIALLY YOURS</div>
+        </div>
+      </div>
+
+      <!-- POST-CLAIM INSTRUCTIONS -->
+      <div class="post-claim-instructions hidden" id="post-claim-instructions">
+        
+        <button class="download-btn" id="download-voucher-btn">
+          <span>📥 SAVE VOUCHER TO PHOTOS</span>
+        </button>
+
+        <div class="instruction-card">
+          <h4>💾 HOW TO SAVE YOUR PASS</h4>
+          <p>Tap the button above to generate and download your official sealed voucher image directly to your device or photo library.</p>
+        </div>
+
+        <div class="instruction-card">
+          <h4>🏁 PIT STOP REDEMPTION GUIDE</h4>
+          <p>Present this sealed VIP voucher to your boyfriend at any time. He is officially obligated to fulfill your chosen wish immediately with zero pit-stop delays! 🏎️💨</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Web Audio API Palette
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx;
+
+    function initAudio() {
+      if (!audioCtx) audioCtx = new AudioCtx();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    // Sound 1: F1 Pit Wall Radio Beep
+    function playF1RadioBeep() {
+      initAudio();
+      const osc1 = audioCtx.createOscillator();
+      const gain1 = audioCtx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(1750, audioCtx.currentTime);
+      gain1.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+      osc1.connect(gain1); gain1.connect(audioCtx.destination);
+      osc1.start(); osc1.stop(audioCtx.currentTime + 0.08);
+
+      setTimeout(() => {
+        const osc2 = audioCtx.createOscillator();
+        const gain2 = audioCtx.createGain();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(2100, audioCtx.currentTime);
+        gain2.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+        osc2.connect(gain2); gain2.connect(audioCtx.destination);
+        osc2.start(); osc2.stop(audioCtx.currentTime + 0.12);
+      }, 90);
+    }
+
+    // Sound 2: Champagne Cork Pop & Sparkling Chimes
+    function playChampagnePop() {
+      initAudio();
+      const popOsc = audioCtx.createOscillator();
+      const popGain = audioCtx.createGain();
+      popOsc.type = 'sine';
+      popOsc.frequency.setValueAtTime(160, audioCtx.currentTime);
+      popOsc.frequency.exponentialRampToValueAtTime(700, audioCtx.currentTime + 0.04);
+      popGain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+      popGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+      popOsc.connect(popGain); popGain.connect(audioCtx.destination);
+      popOsc.start(); popOsc.stop(audioCtx.currentTime + 0.08);
+
+      const notes = [1046.50, 1318.51, 1567.98, 2093.00, 2637.02];
+      notes.forEach((freq, i) => {
+        setTimeout(() => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(); osc.stop(audioCtx.currentTime + 0.6);
+        }, 90 + (i * 70));
+      });
+    }
+
+    // Sound 3: Heartbeat Pulse & Harp Glissando
+    function playHeartbeatAndSparkle() {
+      initAudio();
+      
+      const playPulse = (delay, freq, duration) => {
+        setTimeout(() => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(35, audioCtx.currentTime + duration);
+          gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(); osc.stop(audioCtx.currentTime + duration);
+        }, delay);
+      };
+
+      playPulse(0, 95, 0.14);
+      playPulse(140, 110, 0.18);
+
+      const glissando = [523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51, 1567.98];
+      glissando.forEach((freq, idx) => {
+        setTimeout(() => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.0);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(); osc.stop(audioCtx.currentTime + 1.0);
+        }, 320 + (idx * 80));
+      });
+    }
+
+    // Canvas Petals Background
+    const canvas = document.getElementById('sakura-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const petals = Array.from({length: 22}, () => ({
+      x: Math.random() * width, y: Math.random() * height,
+      size: Math.random() * 8 + 6, speedY: Math.random() * 0.8 + 0.4,
+      speedX: Math.random() * 0.5 - 0.25, angle: Math.random() * 360,
+      spin: Math.random() * 0.02 - 0.01, opacity: Math.random() * 0.4 + 0.3
+    }));
+
+    function animatePetals() {
+      ctx.clearRect(0, 0, width, height);
+      petals.forEach(p => {
+        p.y += p.speedY; p.x += p.speedX; p.angle += p.spin;
+        if (p.y > height + 20) { p.y = -20; p.x = Math.random() * width; }
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.angle);
+        ctx.globalAlpha = p.opacity; ctx.fillStyle = '#FFC0CB';
+        ctx.beginPath(); ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-p.size, -p.size, -p.size, p.size, 0, p.size * 1.5);
+        ctx.bezierCurveTo(p.size, p.size, p.size, -p.size, 0, 0);
+        ctx.fill(); ctx.restore();
+      });
+      requestAnimationFrame(animatePetals);
+    }
+    animatePetals();
+
+    // 3D Card tilt
+    const cardWrapper = document.getElementById('card-wrapper');
+    const card = document.getElementById('paddock-card');
+    cardWrapper.addEventListener('mousemove', (e) => {
+      const rect = cardWrapper.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      card.style.transform = `rotateX(${(y / (rect.height / 2)) * -12}deg) rotateY(${(x / (rect.width / 2)) * 12}deg)`;
+    });
+    cardWrapper.addEventListener('mouseleave', () => card.style.transform = `rotateX(0deg) rotateY(0deg)`);
+
+    // Screen Transitions
+    document.getElementById('enter-paddock-btn').addEventListener('click', () => {
+      playF1RadioBeep();
+      document.getElementById('screen-landing').classList.add('hidden');
+      document.getElementById('screen-celebration').classList.remove('hidden');
+    });
+
+    // CANDLE BLOWOUT
+    let candlesBlown = false;
+    document.getElementById('cake-container').addEventListener('click', () => {
+      if (!candlesBlown) {
+        playChampagnePop();
+
+        document.getElementById('flame-1').classList.add('extinguished');
+        document.getElementById('flame-2').classList.add('extinguished');
+        document.getElementById('cake-instruction').style.opacity = '0';
+        candlesBlown = true;
+
+        document.getElementById('wish-reveal-msg').classList.add('visible');
+
+        const duration = 2.5 * 1000;
+        const animationEnd = Date.now() + duration;
+        const colors = ['#D4AF37', '#FFB7C5', '#CC0000', '#DDA7A5', '#FFFFFF'];
+
+        confetti({
+          particleCount: 80,
+          spread: 100,
+          origin: { y: 0.45 },
+          colors: colors
+        });
+
+        const interval = setInterval(() => {
+          const timeLeft = animationEnd - Date.now();
+          if (timeLeft <= 0) return clearInterval(interval);
+
+          confetti({
+            particleCount: 30,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0, y: 0.6 },
+            colors: colors
+          });
+          confetti({
+            particleCount: 30,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1, y: 0.6 },
+            colors: colors
+          });
+        }, 300);
+      }
+    });
+
+    // Unboxing Trigger
+    let isUnboxed = false;
+    document.getElementById('gift-box-trigger').addEventListener('click', () => {
+      if (!isUnboxed) {
+        playChampagnePop();
+        isUnboxed = true;
+        document.getElementById('voucher-card').classList.remove('hidden');
+        confetti({ particleCount: 100, spread: 100, origin: { y: 0.6 }, colors: ['#CC0000', '#D4AF37', '#FFFFFF', '#FFC0CB'] });
+      }
+    });
+
+    // Voucher Choice & Custom Input Handling
+    const optionItems = document.querySelectorAll('.option-item');
+    const customContainer = document.getElementById('custom-wish-container');
+    const customInput = document.getElementById('custom-wish-text');
+    const customRadio = document.getElementById('custom-wish-radio');
+
+    document.querySelectorAll('input[name="voucher-choice"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        optionItems.forEach(item => item.classList.remove('selected'));
+        e.target.closest('.option-item').classList.add('selected');
+
+        if (e.target.id === 'custom-wish-radio') {
+          customContainer.classList.add('visible');
+          setTimeout(() => customInput.focus(), 150);
+        } else {
+          customContainer.classList.remove('visible');
+        }
+      });
+    });
+
+    // Bind custom input text to radio value
+    customInput.addEventListener('input', (e) => {
+      customRadio.value = e.target.value.trim() !== '' ? e.target.value : 'Custom Wish';
+    });
+
+    // Stamp & Claim Logic
+    document.getElementById('stamp-claim-btn').addEventListener('click', () => {
+      playHeartbeatAndSparkle();
+      document.getElementById('stamp-seal').classList.add('stamped');
+      setTimeout(() => {
+        document.getElementById('post-claim-instructions').classList.remove('hidden');
+      }, 500);
+    });
+
+    // Save Voucher Image Download
+    document.getElementById('download-voucher-btn').addEventListener('click', () => {
+      html2canvas(document.getElementById('voucher-card'), { scale: 2, backgroundColor: '#FFFDF9' }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'VIP-birthday-voucher.png';
+        link.click();
+      });
+    });
+  </script>
+</body>
+</html>
