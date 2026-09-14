@@ -1,1 +1,0 @@
-# vip-paddock-pass
