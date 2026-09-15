@@ -317,6 +317,13 @@
     }
 
     /* --- SCREEN 2: CELEBRATION & CAKE --- */
+    .celebration-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
     .cake-section {
       margin-top: 25px;
       margin-bottom: 20px;
@@ -583,6 +590,80 @@
       transform: scale(1);
     }
 
+    .unboxing-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 0 20px 0;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .click-me-badge {
+      background: linear-gradient(135deg, var(--rosso-corsa), var(--burgundy));
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      box-shadow: 0 6px 15px rgba(204, 0, 0, 0.35);
+      margin-bottom: 10px;
+      animation: pulseBadge 1.5s ease-in-out infinite;
+      border: 1.5px solid var(--gold-bright);
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Option 2: Scroll Anchor badge state */
+    .click-me-badge.anchor-active {
+      background: linear-gradient(135deg, var(--rose-gold), var(--burgundy)) !important;
+      border-color: var(--gold-accent) !important;
+      animation: bounceDown 1.2s ease-in-out infinite !important;
+    }
+
+    .unboxing-container.unboxed {
+      cursor: default;
+    }
+
+    .unboxing-container.unboxed .gift-card {
+      animation: none !important;
+      transform: scale(0.88);
+      opacity: 0.9;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+      transition: all 0.4s ease;
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    .gift-card {
+      width: 135px;
+      height: 135px;
+      border-radius: 28px;
+      background: #FFFFFF;
+      padding: 10px;
+      box-shadow: 0 15px 35px rgba(204, 0, 0, 0.25), 0 0 0 4px rgba(212, 175, 55, 0.7);
+      animation: bounceWiggle 2.2s ease-in-out infinite;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .gift-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .gift-card:hover {
+      transform: scale(1.12) rotate(0deg) !important;
+      box-shadow: 0 20px 45px rgba(204, 0, 0, 0.4), 0 0 25px rgba(249, 212, 35, 0.8);
+    }
+
     @keyframes floatLeft {
       0% { transform: translateY(0) rotate(-4deg); }
       100% { transform: translateY(-8deg) rotate(3deg); }
@@ -593,12 +674,20 @@
       100% { transform: translateY(-8deg) rotate(-3deg); }
     }
 
+    @keyframes bounceWiggle {
+      0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+      20% { transform: translateY(-10deg) scale(1.06) rotate(-4deg); }
+      40% { transform: translateY(0) scale(1.02) rotate(4deg); }
+      60% { transform: translateY(-5deg) scale(1.04) rotate(-2deg); }
+      80% { transform: translateY(0) scale(1.01) rotate(1deg); }
+    }
+
     @keyframes pulseBadge {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(230, 92, 123, 0.5); }
     }
 
-    /* SCREEN 3: VOUCHER CARD DESIGN */
+    /* VOUCHER CARD DESIGN */
     .voucher-card {
       width: 100%;
       max-width: 440px;
@@ -609,7 +698,7 @@
       box-shadow: 0 20px 45px rgba(0,0,0,0.08), inset 0 0 60px rgba(221, 167, 165, 0.1);
       position: relative;
       overflow: hidden;
-      margin-top: 25px;
+      margin-top: 5px;
       color: var(--espresso);
     }
 
@@ -913,7 +1002,7 @@
       </button>
     </div>
 
-    <!-- SCREEN 2: CELEBRATION & CAKE -->
+    <!-- SCREEN 2: CELEBRATION -->
     <div id="screen-celebration" class="section-screen hidden">
       <button class="back-btn" id="back-to-pass-btn">
         <span>←</span> <span>PIT STOP (BACK)</span>
@@ -976,20 +1065,14 @@
         </div>
       </div>
 
-      <!-- NEXT BUTTON (Revealed after candles are clicked) -->
-      <button class="start-btn hidden" id="to-voucher-btn" style="margin-top: 15px;">
-        <span>OPEN YOUR GIFT</span> <span>🎁</span>
-      </button>
+      <div class="unboxing-container" id="gift-box-trigger">
+        <div class="click-me-badge">✨ TAP TO UNBOX YOUR PRESENT ✨</div>
+        <div class="art-card gift-card">
+          <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=300&q=80" alt="Luxury Ribbon Gift Box" />
+        </div>
+      </div>
 
-    </div>
-
-    <!-- SCREEN 3: VOUCHER REDEMPTION -->
-    <div id="screen-voucher" class="section-screen hidden">
-      <button class="back-btn" id="back-to-cake-btn">
-        <span>←</span> <span>BACK TO CAKE</span>
-      </button>
-
-      <div class="voucher-card" id="voucher-card">
+      <div class="voucher-card hidden" id="voucher-card">
         <div class="stamp-seal" id="stamp-seal">
           <div class="kuromi-skull-icon">🖤😈</div>
           <div class="stamp-title">KUROMI</div>
@@ -1026,12 +1109,13 @@
             <span class="option-label">✍️ Something Else...</span>
           </label>
 
+          <!-- Always Visible Custom Input Container -->
           <div class="custom-wish-container" id="custom-wish-container">
             <input type="text" id="custom-wish-text" class="custom-wish-input" placeholder="Type your special birthday wish here..." />
           </div>
         </div>
 
-        <button class="stamp-btn pulse-active" id="stamp-claim-btn">
+        <button class="stamp-btn" id="stamp-claim-btn">
           SEAL & CLAIM VOUCHER
         </button>
 
@@ -1043,6 +1127,7 @@
           *Redeemable exclusively with Andrew. All rights (and hugs) reserved.
         </div>
       </div>
+
     </div>
 
     <footer class="page-footer">
@@ -1144,7 +1229,6 @@
       });
     }
 
-    // Sakura Canvas Animation
     const canvas = document.getElementById('sakura-canvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
@@ -1178,7 +1262,6 @@
     }
     animatePetals();
 
-    // 3D Card Hover Effect
     const cardWrapper = document.getElementById('card-wrapper');
     const card = document.getElementById('paddock-card');
     cardWrapper.addEventListener('mousemove', (e) => {
@@ -1189,21 +1272,18 @@
     });
     cardWrapper.addEventListener('mouseleave', () => card.style.transform = `rotateX(0deg) rotateY(0deg)`);
 
-    // Screen 1 -> Screen 2 Navigation
     document.getElementById('enter-paddock-btn').addEventListener('click', () => {
       playF1RadioBeep();
       document.getElementById('screen-landing').classList.add('hidden');
       document.getElementById('screen-celebration').classList.remove('hidden');
     });
 
-    // Back to Screen 1 Navigation
     document.getElementById('back-to-pass-btn').addEventListener('click', () => {
       playF1RadioBeep();
       document.getElementById('screen-celebration').classList.add('hidden');
       document.getElementById('screen-landing').classList.remove('hidden');
     });
 
-    // Screen 2 Candle Blowing Logic
     let candlesBlown = false;
     document.getElementById('cake-container').addEventListener('click', () => {
       if (!candlesBlown) {
@@ -1225,12 +1305,6 @@
 
         document.getElementById('wish-reveal-msg').classList.add('visible');
 
-        // Reveal Next Button
-        setTimeout(() => {
-          document.getElementById('to-voucher-btn').classList.remove('hidden');
-        }, 1000);
-
-        // Confetti Burst
         const duration = 2.5 * 1000;
         const animationEnd = Date.now() + duration;
         const colors = ['#D4AF37', '#FFB7C5', '#CC0000', '#DDA7A5', '#FFFFFF'];
@@ -1264,22 +1338,33 @@
       }
     });
 
-    // Screen 2 -> Screen 3 Navigation
-    document.getElementById('to-voucher-btn').addEventListener('click', () => {
-      playF1RadioBeep();
-      document.getElementById('screen-celebration').classList.add('hidden');
-      document.getElementById('screen-voucher').classList.remove('hidden');
-      confetti({ particleCount: 100, spread: 100, origin: { y: 0.5 }, colors: ['#CC0000', '#D4AF37', '#FFFFFF', '#FFC0CB', '#9B51E0'] });
+    let isUnboxed = false;
+    const giftTrigger = document.getElementById('gift-box-trigger');
+
+    giftTrigger.addEventListener('click', () => {
+      if (!isUnboxed) {
+        playChampagnePop();
+        isUnboxed = true;
+
+        const badge = giftTrigger.querySelector('.click-me-badge');
+        
+        // Option 2 Implementation: Update badge text, style, and scale card down
+        badge.textContent = '👇 YOUR VOUCHER IS BELOW 👇';
+        badge.classList.add('anchor-active');
+        giftTrigger.classList.add('unboxed');
+
+        // Reveal voucher
+        const voucherCard = document.getElementById('voucher-card');
+        voucherCard.classList.remove('hidden');
+        document.getElementById('stamp-claim-btn').classList.add('pulse-active');
+
+        // Smooth scroll focus to the revealed voucher
+        voucherCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        confetti({ particleCount: 100, spread: 100, origin: { y: 0.6 }, colors: ['#CC0000', '#D4AF37', '#FFFFFF', '#FFC0CB', '#9B51E0'] });
+      }
     });
 
-    // Back to Screen 2 Navigation
-    document.getElementById('back-to-cake-btn').addEventListener('click', () => {
-      playF1RadioBeep();
-      document.getElementById('screen-voucher').classList.add('hidden');
-      document.getElementById('screen-celebration').classList.remove('hidden');
-    });
-
-    // Voucher Selection Logic
     const optionItems = document.querySelectorAll('.option-item');
     const customInput = document.getElementById('custom-wish-text');
     const customRadio = document.getElementById('custom-wish-radio');
@@ -1307,7 +1392,6 @@
       customRadio.value = e.target.value.trim() !== '' ? e.target.value : 'Custom Wish';
     });
 
-    // Claim Voucher Logic
     const claimBtn = document.getElementById('stamp-claim-btn');
     claimBtn.addEventListener('click', () => {
       claimBtn.style.animation = 'none';
