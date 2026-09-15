@@ -71,6 +71,7 @@
       width: 100%;
       max-width: 900px;
       padding: 20px;
+      /* Added safe area padding for iPhone gesture bar */
       padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
       display: flex;
       flex-direction: column;
@@ -334,6 +335,7 @@
       width: 100%;
     }
 
+    /* STRAWBERRY THEME BANNER STYLES */
     .strawberry-banner {
       display: flex;
       align-items: center;
@@ -372,6 +374,7 @@
       100% { transform: translateY(-5deg) rotate(6deg); }
     }
 
+    /* CANDLE CALLOUT BADGE */
     .candle-instruction-badge {
       background: linear-gradient(135deg, #FF66C4, var(--deep-pink));
       color: var(--white-pure);
@@ -534,6 +537,7 @@
       }
     }
 
+    /* BOUQUETS APPEARANCE ANIMATION */
     .bouquets-side {
       display: flex;
       gap: 10px;
@@ -590,6 +594,7 @@
       transform: scale(1);
     }
 
+    /* UNBOXING GIFT AREA */
     .unboxing-container {
       display: flex;
       flex-direction: column;
@@ -772,9 +777,20 @@
     }
 
     .custom-wish-container {
+      display: none;
       width: 100%;
       margin-top: 4px;
       padding-left: 28px;
+    }
+
+    .custom-wish-container.visible {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6deg); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .custom-wish-input {
@@ -815,6 +831,7 @@
       z-index: 2;
     }
 
+    /* Pulse animation class activated via JavaScript after unboxing */
     .stamp-btn.pulse-active {
       animation: pulseBadge 1.5s ease-in-out infinite;
       box-shadow: 0 0 20px rgba(139, 26, 26, 0.5);
@@ -828,7 +845,7 @@
 
     /* SCREENSHOT HINT INSIDE VOUCHER */
     .screenshot-hint {
-      margin-top: 35px;
+      margin-top: 35px; /* Updated spacing */
       text-align: center;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.74rem;
@@ -849,6 +866,7 @@
       transform: translateY(0);
     }
 
+    /* TERMS & CONDITIONS CLAUSE */
     .terms-clause {
       margin-top: 8px;
       text-align: center;
@@ -861,11 +879,11 @@
       z-index: 2;
     }
 
-    /* KUROMI STAMP SEAL DESIGN (Moved Higher) */
+    /* KUROMI STAMP SEAL DESIGN */
     .stamp-seal {
       position: absolute;
-      top: 260px;
-      right: 35px;
+      bottom: 105px;
+      right: 30px;
       transform: rotate(-15deg) scale(2.5);
       width: 95px;
       height: 95px;
@@ -924,6 +942,7 @@
       margin-top: 1px;
     }
 
+    /* FOOTER WATERMARK */
     .page-footer {
       margin-top: 25px;
       text-align: center;
@@ -980,24 +999,29 @@
 
     <!-- SCREEN 2: CELEBRATION -->
     <div id="screen-celebration" class="section-screen hidden">
+      <!-- BACK TO PASS BUTTON -->
       <button class="back-btn" id="back-to-pass-btn">
         <span>←</span> <span>PIT STOP (BACK)</span>
       </button>
 
       <div class="cake-section">
         
+        <!-- STRAWBERRY THEME BANNER -->
         <div id="bday-heading" class="strawberry-banner wish-reveal-msg">
           <span class="strawberry-icon">🍓</span>
           <h2 class="strawberry-title">Happy Birthday, Amore Mio!</h2>
           <span class="strawberry-icon">🍓</span>
         </div>
         
+        <!-- CANDLE BLOWOUT PROMPT -->
         <div class="candle-instruction-badge" id="cake-instruction">
           ✨ CLICK THE CANDLES TO MAKE A WISH ✨
         </div>
         
+        <!-- CAKE DISPLAY CONTAINER -->
         <div class="cake-display-wrapper">
           
+          <!-- LEFT FLOWER BOUQUETS -->
           <div class="bouquets-side left-bouquets">
             <div class="bouquet-card b1" id="bq-1">
               <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=300&q=80" alt="Pink Roses Bouquet" />
@@ -1007,6 +1031,7 @@
             </div>
           </div>
 
+          <!-- BIRTHDAY CAKE -->
           <div class="cake-container" id="cake-container">
             <div class="sparkles">✨ 💖 ✨</div>
             <div class="candles-group">
@@ -1025,6 +1050,7 @@
             <div class="cake-tier-bottom"><div class="drip-layer"></div></div>
           </div>
 
+          <!-- RIGHT FLOWER BOUQUETS -->
           <div class="bouquets-side right-bouquets">
             <div class="bouquet-card b3" id="bq-3">
               <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=300&q=80" alt="Pastel Flowers Bouquet" />
@@ -1041,6 +1067,7 @@
         </div>
       </div>
 
+      <!-- UNBOXING SECTION -->
       <div class="unboxing-container" id="gift-box-trigger">
         <div class="click-me-badge">✨ TAP TO UNBOX YOUR PRESENT ✨</div>
         <div class="art-card gift-card">
@@ -1048,7 +1075,9 @@
         </div>
       </div>
 
+      <!-- VOUCHER CARD -->
       <div class="voucher-card hidden" id="voucher-card">
+        <!-- KUROMI STAMP SEAL -->
         <div class="stamp-seal" id="stamp-seal">
           <div class="kuromi-skull-icon">🖤😈</div>
           <div class="stamp-title">KUROMI</div>
@@ -1085,7 +1114,7 @@
             <span class="option-label">✍️ Something Else...</span>
           </label>
 
-          <!-- Always Visible Custom Input Container -->
+          <!-- Dynamic Input Container -->
           <div class="custom-wish-container" id="custom-wish-container">
             <input type="text" id="custom-wish-text" class="custom-wish-input" placeholder="Type your special birthday wish here..." />
           </div>
@@ -1095,10 +1124,12 @@
           SEAL & CLAIM VOUCHER
         </button>
 
+        <!-- SCREENSHOT HINT INSIDE VOUCHER -->
         <div class="screenshot-hint" id="screenshot-hint">
           📸 <b>Take a screenshot</b> of this voucher and save it to your Photos! Present it anytime to redeem. No expiry date :P
         </div>
 
+        <!-- PLAYFUL TERMS & CONDITIONS CLAUSE -->
         <div class="terms-clause">
           *Redeemable exclusively with Andrew. All rights (and hugs) reserved.
         </div>
@@ -1106,12 +1137,14 @@
 
     </div>
 
+    <!-- FOOTER WATERMARK -->
     <footer class="page-footer">
       Engineered with love by Andrew
     </footer>
   </div>
 
   <script>
+    // Web Audio API Synth Palette
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let audioCtx;
 
@@ -1120,6 +1153,7 @@
       if (audioCtx.state === 'suspended') audioCtx.resume();
     }
 
+    // Sound 1: F1 Pit Wall Radio Beep
     function playF1RadioBeep() {
       initAudio();
       const osc1 = audioCtx.createOscillator();
@@ -1143,6 +1177,7 @@
       }, 90);
     }
 
+    // Sound 2: Champagne Cork Pop & Sparkling Chimes
     function playChampagnePop() {
       initAudio();
       const popOsc = audioCtx.createOscillator();
@@ -1170,6 +1205,7 @@
       });
     }
 
+    // Sound 3: Heartbeat Pulse & Harp Glissando
     function playHeartbeatAndSparkle() {
       initAudio();
       
@@ -1205,6 +1241,7 @@
       });
     }
 
+    // Canvas Petals Background
     const canvas = document.getElementById('sakura-canvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
@@ -1238,6 +1275,7 @@
     }
     animatePetals();
 
+    // 3D Pass Tilt
     const cardWrapper = document.getElementById('card-wrapper');
     const card = document.getElementById('paddock-card');
     cardWrapper.addEventListener('mousemove', (e) => {
@@ -1248,18 +1286,21 @@
     });
     cardWrapper.addEventListener('mouseleave', () => card.style.transform = `rotateX(0deg) rotateY(0deg)`);
 
+    // Screen Transitions
     document.getElementById('enter-paddock-btn').addEventListener('click', () => {
       playF1RadioBeep();
       document.getElementById('screen-landing').classList.add('hidden');
       document.getElementById('screen-celebration').classList.remove('hidden');
     });
 
+    // Return to Paddock Pass View
     document.getElementById('back-to-pass-btn').addEventListener('click', () => {
       playF1RadioBeep();
       document.getElementById('screen-celebration').classList.add('hidden');
       document.getElementById('screen-landing').classList.remove('hidden');
     });
 
+    // CANDLE BLOWOUT & BOUQUET REVEAL
     let candlesBlown = false;
     document.getElementById('cake-container').addEventListener('click', () => {
       if (!candlesBlown) {
@@ -1273,6 +1314,7 @@
         document.getElementById('bday-heading').classList.add('visible');
 
         const bouquetIds = ['bq-1', 'bq-2', 'bq-3', 'bq-4'];
+        bouquetIds.join;
         bouquetIds.forEach((id, index) => {
           setTimeout(() => {
             document.getElementById(id).classList.add('visible');
@@ -1314,6 +1356,7 @@
       }
     });
 
+    // Unboxing Trigger
     let isUnboxed = false;
     const giftTrigger = document.getElementById('gift-box-trigger');
 
@@ -1322,20 +1365,26 @@
         playChampagnePop();
         isUnboxed = true;
 
+        // Stop present animations
         const badge = giftTrigger.querySelector('.click-me-badge');
         const giftCard = giftTrigger.querySelector('.gift-card');
         
         badge.style.animation = 'none';
         giftCard.style.animation = 'none';
 
+        // Reveal voucher card
         document.getElementById('voucher-card').classList.remove('hidden');
+
+        // Activate pulse animation on the claim button
         document.getElementById('stamp-claim-btn').classList.add('pulse-active');
 
         confetti({ particleCount: 100, spread: 100, origin: { y: 0.6 }, colors: ['#CC0000', '#D4AF37', '#FFFFFF', '#FFC0CB', '#9B51E0'] });
       }
     });
 
+    // Voucher Choice & Custom Input Handling
     const optionItems = document.querySelectorAll('.option-item');
+    const customContainer = document.getElementById('custom-wish-container');
     const customInput = document.getElementById('custom-wish-text');
     const customRadio = document.getElementById('custom-wish-radio');
 
@@ -1344,26 +1393,23 @@
         optionItems.forEach(item => item.classList.remove('selected'));
         e.target.closest('.option-item').classList.add('selected');
 
-        if (e.target.id === 'custom-wish-text') {
-          customRadio.checked = true;
-          optionItems.forEach(item => item.classList.remove('selected'));
-          customRadio.closest('.option-item').classList.add('selected');
+        if (e.target.id === 'custom-wish-radio') {
+          customContainer.classList.add('visible');
+          setTimeout(() => customInput.focus(), 150);
+        } else {
+          customContainer.classList.remove('visible');
         }
       });
-    });
-
-    customInput.addEventListener('focus', () => {
-      customRadio.checked = true;
-      optionItems.forEach(item => item.classList.remove('selected'));
-      customRadio.closest('.option-item').classList.add('selected');
     });
 
     customInput.addEventListener('input', (e) => {
       customRadio.value = e.target.value.trim() !== '' ? e.target.value : 'Custom Wish';
     });
 
+    // Stamp & Claim Logic
     const claimBtn = document.getElementById('stamp-claim-btn');
     claimBtn.addEventListener('click', () => {
+      // Stop the claim button pulse animation upon clicking
       claimBtn.style.animation = 'none';
       claimBtn.classList.remove('pulse-active');
 
