@@ -30,6 +30,9 @@
       --dark-carbon: #121212;
       --white-pure: #FFFFFF;
       --cake-pink: #FFB7C5;
+      --kuromi-purple: #9B51E0;
+      --kuromi-dark: #2A0845;
+      --kuromi-pink: #FF66C4;
     }
 
     * {
@@ -52,7 +55,7 @@
       position: relative;
     }
 
-    /* Sakura / Heart Background Canvas */
+    /* Background Canvas */
     #sakura-canvas {
       position: fixed;
       top: 0;
@@ -293,7 +296,7 @@
     }
 
     .cake-section {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -301,12 +304,42 @@
       width: 100%;
     }
 
+    /* CANDLE CALLOUT BADGE */
+    .candle-instruction-badge {
+      background: linear-gradient(135deg, #FF66C4, var(--deep-pink));
+      color: var(--white-pure);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 10px 22px;
+      border-radius: 30px;
+      box-shadow: 0 6px 18px rgba(230, 92, 123, 0.4);
+      margin: 14px 0 8px 0;
+      animation: pulseBadge 1.5s ease-in-out infinite;
+      border: 1.5px solid var(--white-pure);
+      transition: opacity 0.4s ease;
+      position: relative;
+      z-index: 6;
+    }
+
+    .cake-display-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+      width: 100%;
+      min-height: 180px;
+    }
+
     .cake-container {
       position: relative;
       width: 200px;
       height: 160px;
-      margin: 15px auto 0 auto;
+      margin: 0;
       cursor: pointer;
+      z-index: 5;
     }
 
     .cake-tier-bottom {
@@ -379,7 +412,6 @@
       border: 1px solid var(--gold-accent);
     }
 
-    /* Candle Wick */
     .wick {
       position: absolute;
       top: -6px;
@@ -391,7 +423,6 @@
       border-radius: 1px;
     }
 
-    /* Upgraded Realistic Flame */
     .flame {
       position: absolute;
       top: -24px;
@@ -407,7 +438,6 @@
       pointer-events: none;
     }
 
-    /* Inner Blue Flame Core */
     .flame::after {
       content: '';
       position: absolute;
@@ -437,16 +467,48 @@
       }
     }
 
-    .cake-instruction {
-      font-size: 0.85rem;
-      color: #888;
-      margin-top: 8px;
-      font-style: italic;
-      transition: opacity 0.3s ease;
+    /* BOUQUETS APPEARANCE ANIMATION */
+    .bouquets-side {
+      display: flex;
+      gap: 10px;
     }
 
+    .bouquet-card {
+      width: 85px;
+      height: 85px;
+      border-radius: 20px;
+      background: #FFFFFF;
+      box-shadow: 0 10px 22px rgba(230, 92, 123, 0.2), 0 0 0 2px rgba(255, 182, 193, 0.6);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.1) rotate(-15deg);
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+
+    .bouquet-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .bouquet-card.visible {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+      pointer-events: auto;
+    }
+
+    .bouquet-card.b1 { animation: floatLeft 3.2s ease-in-out infinite alternate; }
+    .bouquet-card.b2 { animation: floatRight 3.2s ease-in-out 0.3s infinite alternate; }
+    .bouquet-card.b3 { animation: floatLeft 3.2s ease-in-out 0.6s infinite alternate; }
+    .bouquet-card.b4 { animation: floatRight 3.2s ease-in-out 0.9s infinite alternate; }
+
     .wish-reveal-msg {
-      margin-top: 12px;
+      margin-top: 15px;
       font-family: 'Alex Brush', cursive;
       font-size: 2.2rem;
       color: var(--burgundy);
@@ -462,70 +524,78 @@
       transform: scale(1);
     }
 
-    /* --- CUTE IMPORTED IMAGES ART SCENE --- */
-    .imported-art-scene {
+    /* UNBOXING GIFT AREA */
+    .unboxing-container {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 18px;
-      margin: 15px 0 20px 0;
+      margin: 15px 0 25px 0;
+      position: relative;
       cursor: pointer;
     }
 
-    .art-card {
-      width: 95px;
-      height: 95px;
-      border-radius: 20px;
-      background: #FFFFFF;
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08), 0 0 0 2px rgba(221, 167, 165, 0.3);
-      padding: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    .click-me-badge {
+      background: linear-gradient(135deg, var(--rosso-corsa), var(--burgundy));
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      box-shadow: 0 6px 15px rgba(204, 0, 0, 0.35);
+      margin-bottom: 10px;
+      animation: pulseBadge 1.5s ease-in-out infinite;
+      border: 1.5px solid var(--gold-bright);
       position: relative;
-    }
-
-    .art-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 14px;
-    }
-
-    .bear-card {
-      animation: floatLeft 3.2s ease-in-out infinite alternate;
+      z-index: 5;
     }
 
     .gift-card {
-      width: 110px;
-      height: 110px;
-      border-radius: 24px;
-      box-shadow: 0 15px 30px rgba(204, 0, 0, 0.15), 0 0 0 3px rgba(212, 175, 55, 0.5);
-      animation: pulseGift 2.2s ease-in-out infinite;
+      width: 135px;
+      height: 135px;
+      border-radius: 28px;
+      background: #FFFFFF;
+      padding: 10px;
+      box-shadow: 0 15px 35px rgba(204, 0, 0, 0.25), 0 0 0 4px rgba(212, 175, 55, 0.7);
+      animation: bounceWiggle 2.2s ease-in-out infinite;
+      position: relative;
+      transition: all 0.3s ease;
     }
 
-    .roses-card {
-      animation: floatRight 3.2s ease-in-out 0.4s infinite alternate;
+    .gift-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
     }
 
-    .imported-art-scene:hover .art-card {
-      transform: scale(1.08);
+    .gift-card:hover {
+      transform: scale(1.12) rotate(0deg) !important;
+      box-shadow: 0 20px 45px rgba(204, 0, 0, 0.4), 0 0 25px rgba(249, 212, 35, 0.8);
     }
 
     @keyframes floatLeft {
-      0% { transform: translateY(0) rotate(-3deg); }
+      0% { transform: translateY(0) rotate(-4deg); }
       100% { transform: translateY(-8deg) rotate(3deg); }
     }
 
     @keyframes floatRight {
-      0% { transform: translateY(0) rotate(3deg); }
+      0% { transform: translateY(0) rotate(4deg); }
       100% { transform: translateY(-8deg) rotate(-3deg); }
     }
 
-    @keyframes pulseGift {
+    @keyframes bounceWiggle {
+      0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+      20% { transform: translateY(-10deg) scale(1.06) rotate(-4deg); }
+      40% { transform: translateY(0) scale(1.02) rotate(4deg); }
+      60% { transform: translateY(-5deg) scale(1.04) rotate(-2deg); }
+      80% { transform: translateY(0) scale(1.01) rotate(1deg); }
+    }
+
+    @keyframes pulseBadge {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06) translateY(-4deg); }
+      50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(230, 92, 123, 0.5); }
     }
 
     /* VOUCHER CARD DESIGN */
@@ -636,7 +706,6 @@
       flex: 1;
     }
 
-    /* Dynamic Custom Wish Field */
     .custom-wish-container {
       display: none;
       width: 100%;
@@ -696,38 +765,44 @@
       box-shadow: 0 8px 20px rgba(139, 26, 26, 0.3);
     }
 
-    /* Wax Seal Stamp Design */
+    /* KUROMI STAMP SEAL DESIGN */
     .stamp-seal {
       position: absolute;
-      bottom: 25px;
-      right: 20px;
+      bottom: 20px;
+      right: 18px;
       transform: rotate(-12deg) scale(2.5);
-      width: 105px;
-      height: 105px;
-      background: radial-gradient(circle at 30% 30%, #A52A2A, #8B0000, #5C0000);
+      width: 110px;
+      height: 110px;
+      background: radial-gradient(circle at 35% 35%, #BA86E8 0%, #6B3BA7 60%, var(--kuromi-dark) 100%);
       border-radius: 50%;
-      color: rgba(255,255,255,0.9);
+      color: var(--white-pure);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Montserrat', sans-serif;
       text-align: center;
       opacity: 0;
       pointer-events: none;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -4px 8px rgba(0,0,0,0.4);
-      border: 2px solid #5C0000;
-      filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.2));
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 8px rgba(0,0,0,0.6);
+      border: 3px solid var(--kuromi-pink);
       z-index: 10;
     }
 
     .stamp-seal::before {
       content: '';
       position: absolute;
-      top: 4px; left: 4px; right: 4px; bottom: 4px;
-      border: 1px dashed rgba(255,255,255,0.4);
+      top: 5px; left: 5px; right: 5px; bottom: 5px;
+      border: 1.5px dashed rgba(255, 255, 255, 0.6);
       border-radius: 50%;
+    }
+
+    .kuromi-skull-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+      margin-bottom: 2px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     }
 
     .stamp-seal.stamped {
@@ -736,19 +811,21 @@
     }
 
     .stamp-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin: 2px 0;
-      font-style: italic;
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #FFFFFF;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     .stamp-sub {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.45rem;
-      letter-spacing: 2px;
+      font-size: 0.48rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      opacity: 0.8;
+      color: var(--kuromi-pink);
+      margin-top: 1px;
     }
 
     /* INSTRUCTIONS & REDEMPTION CONTAINER */
@@ -838,13 +915,13 @@
           <div class="pass-body">
             <div class="guest-photo-frame"><div class="guest-initials">21</div></div>
             <div>
-              <div class="guest-name">BIRTHDAY VIP GUEST</div>
+              <div class="guest-name">BIRTHDAY VIP PASS</div>
               <div class="access-tag">ALL AREAS ACCESS</div>
             </div>
             <div class="credential-details">
               <div class="detail-row"><span>EVENT:</span><span>21ST BIRTHDAY GP</span></div>
               <div class="detail-row"><span>DATE:</span><span>SEPTEMBER 16</span></div>
-              <div class="detail-row"><span>VIP HOST:</span><span>FILO DONOFRIO</span></div>
+              <div class="detail-row"><span>NAME:</span><span>FILO DONOFRIO</span></div>
             </div>
             <div class="barcode-container">
               <div class="fake-barcode"></div>
@@ -863,26 +940,56 @@
     <div id="screen-celebration" class="section-screen hidden">
       <div class="cake-section">
         <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--dark-carbon);">
-          Happy 21st Birthday, Amore Mio!
+          Happy Birthday, Amore Mio!
         </h2>
-        <p class="cake-instruction" id="cake-instruction">Click the candles to blow out your birthday wish ✨</p>
         
-        <div class="cake-container" id="cake-container">
-          <div class="sparkles">✨ 💖 ✨</div>
-          <div class="candles-group">
-            <div class="candle">
-              <div class="wick"></div>
-              2
-              <div class="flame" id="flame-1"></div>
+        <!-- CANDLE BLOWOUT PROMPT -->
+        <div class="candle-instruction-badge" id="cake-instruction">
+          ✨ CLICK THE CANDLES TO MAKE A WISH ✨
+        </div>
+        
+        <!-- CAKE DISPLAY CONTAINER (BOUQUETS HIDE INITIALLY) -->
+        <div class="cake-display-wrapper">
+          
+          <!-- LEFT FLOWER BOUQUETS -->
+          <div class="bouquets-side left-bouquets">
+            <div class="bouquet-card b1" id="bq-1">
+              <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=300&q=80" alt="Pink Roses Bouquet" />
             </div>
-            <div class="candle">
-              <div class="wick"></div>
-              1
-              <div class="flame" id="flame-2"></div>
+            <div class="bouquet-card b2" id="bq-2">
+              <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=300&q=80" alt="Red Floral Bouquet" />
             </div>
           </div>
-          <div class="cake-tier-top"><div class="drip-layer"></div></div>
-          <div class="cake-tier-bottom"><div class="drip-layer"></div></div>
+
+          <!-- BIRTHDAY CAKE -->
+          <div class="cake-container" id="cake-container">
+            <div class="sparkles">✨ 💖 ✨</div>
+            <div class="candles-group">
+              <div class="candle">
+                <div class="wick"></div>
+                2
+                <div class="flame" id="flame-1"></div>
+              </div>
+              <div class="candle">
+                <div class="wick"></div>
+                1
+                <div class="flame" id="flame-2"></div>
+              </div>
+            </div>
+            <div class="cake-tier-top"><div class="drip-layer"></div></div>
+            <div class="cake-tier-bottom"><div class="drip-layer"></div></div>
+          </div>
+
+          <!-- RIGHT FLOWER BOUQUETS -->
+          <div class="bouquets-side right-bouquets">
+            <div class="bouquet-card b3" id="bq-3">
+              <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=300&q=80" alt="Pastel Flowers Bouquet" />
+            </div>
+            <div class="bouquet-card b4" id="bq-4">
+              <img src="https://images.unsplash.com/photo-1533616688419-b7a585564566?auto=format&fit=crop&w=300&q=80" alt="Fresh Pink Bouquet" />
+            </div>
+          </div>
+
         </div>
 
         <div class="wish-reveal-msg" id="wish-reveal-msg">
@@ -890,22 +997,11 @@
         </div>
       </div>
 
-      <!-- IMPORTED IMAGE SCENE -->
-      <div style="text-align: center;">
-        <p style="font-size: 0.85rem; font-weight: 700; color: var(--deep-pink); letter-spacing: 1px; margin-bottom: 6px;">
-          🎁 CLICK THE GIFT TO UNBOX YOUR VIP PERMIT
-        </p>
-      </div>
-
-      <div class="imported-art-scene" id="gift-box-trigger">
-        <div class="art-card bear-card">
-          <img src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=300&q=80" alt="Cute Teddy Bear" />
-        </div>
+      <!-- UNBOXING SECTION -->
+      <div class="unboxing-container" id="gift-box-trigger">
+        <div class="click-me-badge">✨ TAP TO UNBOX YOUR PRESENT ✨</div>
         <div class="art-card gift-card">
-          <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=300&q=80" alt="Luxury Gift Box" />
-        </div>
-        <div class="art-card roses-card">
-          <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=300&q=80" alt="Rose Bouquet" />
+          <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=300&q=80" alt="Luxury Ribbon Gift Box" />
         </div>
       </div>
 
@@ -916,8 +1012,8 @@
         </div>
 
         <div class="voucher-header">
-          <h3>Permesso Speciale</h3>
-          <p>Your 21st Birthday Wish, Officially Granted.</p>
+          <h3>For a very special girl</h3>
+          <p>Choose one from below:</p>
         </div>
 
         <div class="voucher-options">
@@ -951,10 +1047,11 @@
           SEAL & CLAIM VOUCHER
         </button>
 
+        <!-- KUROMI STAMP SEAL -->
         <div class="stamp-seal" id="stamp-seal">
-          <div class="stamp-sub">SEALED WITH</div>
-          <div class="stamp-title">LOVE</div>
-          <div class="stamp-sub">OFFICIALLY YOURS</div>
+          <div class="kuromi-skull-icon">🖤😈</div>
+          <div class="stamp-title">KUROMI</div>
+          <div class="stamp-sub">APPROVED 🖤</div>
         </div>
       </div>
 
@@ -966,13 +1063,8 @@
         </button>
 
         <div class="instruction-card">
-          <h4>💾 HOW TO SAVE YOUR PASS</h4>
-          <p>Tap the button above to generate and download your official sealed voucher image directly to your device or photo library.</p>
-        </div>
-
-        <div class="instruction-card">
           <h4>🏁 PIT STOP REDEMPTION GUIDE</h4>
-          <p>Present this sealed VIP voucher to your boyfriend at any time. He is officially obligated to fulfill your chosen wish immediately with zero pit-stop delays! 🏎️💨</p>
+          <p>Tap the button above to generate and download your official sealed voucher and present it anytime to your boyfriend to redeem. No expiry date :P</p>
         </div>
 
       </div>
@@ -981,7 +1073,7 @@
   </div>
 
   <script>
-    // Web Audio API Palette
+    // Web Audio API Synth Palette
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let audioCtx;
 
@@ -1112,7 +1204,7 @@
     }
     animatePetals();
 
-    // 3D Card tilt
+    // 3D Pass Tilt
     const cardWrapper = document.getElementById('card-wrapper');
     const card = document.getElementById('paddock-card');
     cardWrapper.addEventListener('mousemove', (e) => {
@@ -1130,7 +1222,7 @@
       document.getElementById('screen-celebration').classList.remove('hidden');
     });
 
-    // CANDLE BLOWOUT
+    // CANDLE BLOWOUT & BOUQUET REVEAL
     let candlesBlown = false;
     document.getElementById('cake-container').addEventListener('click', () => {
       if (!candlesBlown) {
@@ -1140,6 +1232,14 @@
         document.getElementById('flame-2').classList.add('extinguished');
         document.getElementById('cake-instruction').style.opacity = '0';
         candlesBlown = true;
+
+        // Reveal bouquets in staggered bloom sequence
+        const bouquetIds = ['bq-1', 'bq-2', 'bq-3', 'bq-4'];
+        bouquetIds.forEach((id, index) => {
+          setTimeout(() => {
+            document.getElementById(id).classList.add('visible');
+          }, index * 180);
+        });
 
         document.getElementById('wish-reveal-msg').classList.add('visible');
 
@@ -1183,7 +1283,7 @@
         playChampagnePop();
         isUnboxed = true;
         document.getElementById('voucher-card').classList.remove('hidden');
-        confetti({ particleCount: 100, spread: 100, origin: { y: 0.6 }, colors: ['#CC0000', '#D4AF37', '#FFFFFF', '#FFC0CB'] });
+        confetti({ particleCount: 100, spread: 100, origin: { y: 0.6 }, colors: ['#CC0000', '#D4AF37', '#FFFFFF', '#FFC0CB', '#9B51E0'] });
       }
     });
 
@@ -1226,7 +1326,7 @@
       html2canvas(document.getElementById('voucher-card'), { scale: 2, backgroundColor: '#FFFDF9' }).then(canvas => {
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png');
-        link.download = 'VIP-birthday-voucher.png';
+        link.download = 'VIP-kuromi-birthday-voucher.png';
         link.click();
       });
     });
