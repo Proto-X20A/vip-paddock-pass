@@ -304,45 +304,6 @@
       width: 100%;
     }
 
-    /* STRAWBERRY THEME BANNER STYLES */
-    .strawberry-banner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #FFB7C5 0%, #FFF0F3 50%, #FF8DA1 100%);
-      border: 2px dashed #E65C7B;
-      padding: 8px 24px;
-      border-radius: 40px;
-      box-shadow: 0 8px 20px rgba(230, 92, 123, 0.25);
-      margin-bottom: 12px;
-    }
-
-    .strawberry-title {
-      font-family: 'Alex Brush', cursive;
-      font-size: 2.5rem;
-      color: #8B1A1A;
-      margin: 0;
-      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-      line-height: 1.1;
-      font-weight: 400;
-    }
-
-    .strawberry-icon {
-      font-size: 1.8rem;
-      animation: strawberryBounce 2s ease-in-out infinite alternate;
-      filter: drop-shadow(0 3px 6px rgba(204, 0, 0, 0.3));
-    }
-
-    .strawberry-icon:last-child {
-      animation-delay: 0.3s;
-    }
-
-    @keyframes strawberryBounce {
-      0% { transform: translateY(0) rotate(-6deg); }
-      100% { transform: translateY(-5deg) rotate(6deg); }
-    }
-
     /* CANDLE CALLOUT BADGE */
     .candle-instruction-badge {
       background: linear-gradient(135deg, #FF66C4, var(--deep-pink));
@@ -354,7 +315,7 @@
       padding: 10px 22px;
       border-radius: 30px;
       box-shadow: 0 6px 18px rgba(230, 92, 123, 0.4);
-      margin: 8px 0 8px 0;
+      margin: 14px 0 8px 0;
       animation: pulseBadge 1.5s ease-in-out infinite;
       border: 1.5px solid var(--white-pure);
       transition: opacity 0.4s ease;
@@ -978,13 +939,9 @@
     <!-- SCREEN 2: CELEBRATION -->
     <div id="screen-celebration" class="section-screen hidden">
       <div class="cake-section">
-        
-        <!-- STRAWBERRY THEME BANNER (HIDDEN INITIALLY) -->
-        <div id="bday-heading" class="strawberry-banner wish-reveal-msg">
-          <span class="strawberry-icon">🍓</span>
-          <h2 class="strawberry-title">Happy Birthday, Amore Mio!</h2>
-          <span class="strawberry-icon">🍓</span>
-        </div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--dark-carbon);">
+          Happy Birthday, Amore Mio!
+        </h2>
         
         <!-- CANDLE BLOWOUT PROMPT -->
         <div class="candle-instruction-badge" id="cake-instruction">
@@ -1107,7 +1064,7 @@
 
         <div class="instruction-card">
           <h4>🏁 PIT STOP REDEMPTION GUIDE</h4>
-          <p>Tap the button above to download your exclusive voucher and present it to your boyfriend to redeem. No expiry date :P</p>
+          <p>Tap the button above to generate and download your official sealed voucher and present it anytime to your boyfriend to redeem. No expiry date :P</p>
         </div>
 
       </div>
@@ -1275,9 +1232,6 @@
         document.getElementById('flame-2').classList.add('extinguished');
         document.getElementById('cake-instruction').style.opacity = '0';
         candlesBlown = true;
-
-        // Reveal the Strawberry Birthday Heading
-        document.getElementById('bday-heading').classList.add('visible');
 
         // Reveal bouquets in staggered bloom sequence
         const bouquetIds = ['bq-1', 'bq-2', 'bq-3', 'bq-4'];
