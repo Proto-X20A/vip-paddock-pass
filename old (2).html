@@ -82,42 +82,12 @@
       flex-direction: column;
       align-items: center;
       transition: opacity 0.6s ease, transform 0.6s ease;
-      position: relative;
     }
 
     .hidden {
       display: none !important;
       opacity: 0;
       transform: translateY(20px);
-    }
-
-    /* --- BACK BUTTON STYLING --- */
-    .back-btn {
-      position: absolute;
-      top: 0;
-      left: 10px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid var(--gold-accent);
-      color: var(--dark-carbon);
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      z-index: 20;
-    }
-
-    .back-btn:hover {
-      background: var(--white-pure);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(204, 0, 0, 0.15);
     }
 
     /* --- SCREEN 1: PADDOCK PASS LANDING --- */
@@ -324,7 +294,6 @@
     }
 
     .cake-section {
-      margin-top: 25px;
       margin-bottom: 20px;
       text-align: center;
       display: flex;
@@ -383,7 +352,7 @@
       padding: 10px 22px;
       border-radius: 30px;
       box-shadow: 0 6px 18px rgba(230, 92, 123, 0.4);
-      margin: 12px 0 12px 0;
+      margin: 8px 0 8px 0;
       animation: pulseBadge 1.5s ease-in-out infinite;
       border: 1.5px solid var(--white-pure);
       transition: opacity 0.4s ease;
@@ -396,7 +365,7 @@
       align-items: center;
       justify-content: center;
       gap: 15px;
-      margin-top: 5px;
+      margin-top: 10px;
       width: 100%;
       min-height: 180px;
     }
@@ -597,7 +566,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 10px 0 20px 0;
+      margin: 15px 0 25px 0;
       position: relative;
       cursor: pointer;
     }
@@ -731,7 +700,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 35px;
+      margin-bottom: 20px;
       position: relative;
       z-index: 2;
     }
@@ -829,12 +798,6 @@
       z-index: 2;
     }
 
-    /* Pulse animation class activated via JavaScript after unboxing */
-    .stamp-btn.pulse-active {
-      animation: pulseBadge 1.5s ease-in-out infinite;
-      box-shadow: 0 0 20px rgba(139, 26, 26, 0.5);
-    }
-
     .stamp-btn:hover {
       background: #731515;
       transform: translateY(-2px);
@@ -843,7 +806,7 @@
 
     /* SCREENSHOT HINT INSIDE VOUCHER */
     .screenshot-hint {
-      margin-top: 18px;
+      margin-top: 14px;
       text-align: center;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.74rem;
@@ -864,27 +827,14 @@
       transform: translateY(0);
     }
 
-    /* TERMS & CONDITIONS CLAUSE */
-    .terms-clause {
-      margin-top: 8px;
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.72rem;
-      color: var(--espresso);
-      opacity: 0.75;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* KUROMI STAMP SEAL DESIGN */
+    /* KUROMI STAMP SEAL DESIGN (MOVED HIGHER UP) */
     .stamp-seal {
       position: absolute;
-      bottom: 105px;
-      right: 30px;
-      transform: rotate(-15deg) scale(2.5);
-      width: 95px;
-      height: 95px;
+      bottom: 110px;
+      right: 18px;
+      transform: rotate(-12deg) scale(2.5);
+      width: 110px;
+      height: 110px;
       background: radial-gradient(circle at 35% 35%, #BA86E8 0%, #6B3BA7 60%, var(--kuromi-dark) 100%);
       border-radius: 50%;
       color: var(--white-pure);
@@ -911,7 +861,7 @@
     }
 
     .kuromi-skull-icon {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       line-height: 1;
       margin-bottom: 2px;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
@@ -919,38 +869,25 @@
 
     .stamp-seal.stamped {
       opacity: 1;
-      transform: rotate(-15deg) scale(1);
+      transform: rotate(-12deg) scale(1);
     }
 
     .stamp-title {
-      font-size: 0.78rem;
+      font-size: 0.9rem;
       font-weight: 900;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       color: #FFFFFF;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     .stamp-sub {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.42rem;
+      font-size: 0.48rem;
       font-weight: 800;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       color: var(--kuromi-pink);
       margin-top: 1px;
-    }
-
-    /* FOOTER WATERMARK */
-    .page-footer {
-      margin-top: 25px;
-      text-align: center;
-      font-family: 'Alex Brush', cursive;
-      font-size: 1.35rem;
-      color: var(--burgundy);
-      opacity: 0.75;
-      letter-spacing: 0.5px;
-      width: 100%;
-      padding-bottom: 10px;
     }
   </style>
 </head>
@@ -997,14 +934,9 @@
 
     <!-- SCREEN 2: CELEBRATION -->
     <div id="screen-celebration" class="section-screen hidden">
-      <!-- BACK TO PASS BUTTON -->
-      <button class="back-btn" id="back-to-pass-btn">
-        <span>←</span> <span>PIT STOP (BACK)</span>
-      </button>
-
       <div class="cake-section">
         
-        <!-- STRAWBERRY THEME BANNER -->
+        <!-- STRAWBERRY THEME BANNER (HIDDEN INITIALLY) -->
         <div id="bday-heading" class="strawberry-banner wish-reveal-msg">
           <span class="strawberry-icon">🍓</span>
           <h2 class="strawberry-title">Happy Birthday, Amore Mio!</h2>
@@ -1016,7 +948,7 @@
           ✨ CLICK THE CANDLES TO MAKE A WISH ✨
         </div>
         
-        <!-- CAKE DISPLAY CONTAINER -->
+        <!-- CAKE DISPLAY CONTAINER (BOUQUETS HIDE INITIALLY) -->
         <div class="cake-display-wrapper">
           
           <!-- LEFT FLOWER BOUQUETS -->
@@ -1075,13 +1007,6 @@
 
       <!-- VOUCHER CARD -->
       <div class="voucher-card hidden" id="voucher-card">
-        <!-- KUROMI STAMP SEAL -->
-        <div class="stamp-seal" id="stamp-seal">
-          <div class="kuromi-skull-icon">🖤😈</div>
-          <div class="stamp-title">KUROMI</div>
-          <div class="stamp-sub">APPROVED 🖤</div>
-        </div>
-
         <div style="text-align: center;">
           <span class="vip-badge-header">A Special Gift For You</span>
         </div>
@@ -1122,23 +1047,20 @@
           SEAL & CLAIM VOUCHER
         </button>
 
-        <!-- SCREENSHOT HINT INSIDE VOUCHER -->
+        <!-- SCREENSHOT HINT BUILT INSIDE VOUCHER -->
         <div class="screenshot-hint" id="screenshot-hint">
-          📸 <b>Take a screenshot</b> of this voucher to save it to your Photos! Show it anytime to your boyfriend to redeem. No expiry date :P
+          📸 <b>Take a screenshot</b> of this voucher to save it to your Photos! Present it to your boyfriend anytime to redeem. No expiry date :P
         </div>
 
-        <!-- PLAYFUL TERMS & CONDITIONS CLAUSE -->
-        <div class="terms-clause">
-          *Redeemable exclusively with Andrew. All rights (and hugs) reserved.
+        <!-- KUROMI STAMP SEAL -->
+        <div class="stamp-seal" id="stamp-seal">
+          <div class="kuromi-skull-icon">🖤😈</div>
+          <div class="stamp-title">KUROMI</div>
+          <div class="stamp-sub">APPROVED 🖤</div>
         </div>
       </div>
 
     </div>
-
-    <!-- FOOTER WATERMARK -->
-    <footer class="page-footer">
-      Engineered with way too much love by Andrew
-    </footer>
   </div>
 
   <script>
@@ -1291,13 +1213,6 @@
       document.getElementById('screen-celebration').classList.remove('hidden');
     });
 
-    // Return to Paddock Pass View
-    document.getElementById('back-to-pass-btn').addEventListener('click', () => {
-      playF1RadioBeep();
-      document.getElementById('screen-celebration').classList.add('hidden');
-      document.getElementById('screen-landing').classList.remove('hidden');
-    });
-
     // CANDLE BLOWOUT & BOUQUET REVEAL
     let candlesBlown = false;
     document.getElementById('cake-container').addEventListener('click', () => {
@@ -1309,8 +1224,10 @@
         document.getElementById('cake-instruction').style.opacity = '0';
         candlesBlown = true;
 
+        // Reveal the Strawberry Birthday Heading
         document.getElementById('bday-heading').classList.add('visible');
 
+        // Reveal bouquets in staggered bloom sequence
         const bouquetIds = ['bq-1', 'bq-2', 'bq-3', 'bq-4'];
         bouquetIds.forEach((id, index) => {
           setTimeout(() => {
@@ -1355,26 +1272,11 @@
 
     // Unboxing Trigger
     let isUnboxed = false;
-    const giftTrigger = document.getElementById('gift-box-trigger');
-
-    giftTrigger.addEventListener('click', () => {
+    document.getElementById('gift-box-trigger').addEventListener('click', () => {
       if (!isUnboxed) {
         playChampagnePop();
         isUnboxed = true;
-
-        // Stop present animations
-        const badge = giftTrigger.querySelector('.click-me-badge');
-        const giftCard = giftTrigger.querySelector('.gift-card');
-        
-        badge.style.animation = 'none';
-        giftCard.style.animation = 'none';
-
-        // Reveal voucher card
         document.getElementById('voucher-card').classList.remove('hidden');
-
-        // Activate pulse animation on the claim button
-        document.getElementById('stamp-claim-btn').classList.add('pulse-active');
-
         confetti({ particleCount: 100, spread: 100, origin: { y: 0.6 }, colors: ['#CC0000', '#D4AF37', '#FFFFFF', '#FFC0CB', '#9B51E0'] });
       }
     });
@@ -1399,17 +1301,13 @@
       });
     });
 
+    // Bind custom input text to radio value
     customInput.addEventListener('input', (e) => {
       customRadio.value = e.target.value.trim() !== '' ? e.target.value : 'Custom Wish';
     });
 
-    // Stamp & Claim Logic
-    const claimBtn = document.getElementById('stamp-claim-btn');
-    claimBtn.addEventListener('click', () => {
-      // Stop the claim button pulse animation upon clicking
-      claimBtn.style.animation = 'none';
-      claimBtn.classList.remove('pulse-active');
-
+    // Stamp & Claim Logic (Reveals Screenshot Hint Inside Voucher)
+    document.getElementById('stamp-claim-btn').addEventListener('click', () => {
       playHeartbeatAndSparkle();
       document.getElementById('stamp-seal').classList.add('stamped');
       document.getElementById('screenshot-hint').classList.add('visible');
