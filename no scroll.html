@@ -616,30 +616,6 @@
       z-index: 5;
     }
 
-    /* Option 2: Scroll Anchor badge state */
-    .click-me-badge.anchor-active {
-      background: linear-gradient(135deg, var(--rose-gold), var(--burgundy)) !important;
-      border-color: var(--gold-accent) !important;
-      animation: bounceDown 1.2s ease-in-out infinite !important;
-    }
-
-    .unboxing-container.unboxed {
-      cursor: default;
-    }
-
-    .unboxing-container.unboxed .gift-card {
-      animation: none !important;
-      transform: scale(0.88);
-      opacity: 0.9;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
-      transition: all 0.4s ease;
-    }
-
-    @keyframes bounceDown {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(5px); }
-    }
-
     .gift-card {
       width: 135px;
       height: 135px;
@@ -694,7 +670,7 @@
       background: var(--warm-ivory);
       border: 2px solid var(--rose-gold);
       border-radius: 16px;
-      padding: 30px 25px 20px 25px;
+      padding: 30px 25px 20px 25px; /* Reduced bottom padding */
       box-shadow: 0 20px 45px rgba(0,0,0,0.08), inset 0 0 60px rgba(221, 167, 165, 0.1);
       position: relative;
       overflow: hidden;
@@ -752,7 +728,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 20px; /* Reduced margin below options list */
       position: relative;
       z-index: 2;
     }
@@ -850,15 +826,15 @@
       box-shadow: 0 8px 20px rgba(139, 26, 26, 0.3);
     }
 
-    /* SCREENSHOT HINT INSIDE VOUCHER */
+    /* SCREENSHOT HINT INSIDE VOUCHER - PADDING REDUCED */
     .screenshot-hint {
-      margin-top: 12px;
+      margin-top: 12px; /* Reduced from 35px */
       text-align: center;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.74rem;
       color: var(--burgundy);
       background: rgba(255, 182, 193, 0.35);
-      padding: 8px 12px;
+      padding: 8px 12px; /* Slightly tighter padding */
       border-radius: 8px;
       border: 1px dashed var(--rose-gold);
       opacity: 0;
@@ -874,7 +850,7 @@
     }
 
     .terms-clause {
-      margin-top: 6px;
+      margin-top: 6px; /* Reduced from 8px */
       text-align: center;
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -1347,19 +1323,13 @@
         isUnboxed = true;
 
         const badge = giftTrigger.querySelector('.click-me-badge');
+        const giftCard = giftTrigger.querySelector('.gift-card');
         
-        // Option 2 Implementation: Update badge text, style, and scale card down
-        badge.textContent = '👇 YOUR VOUCHER IS BELOW 👇';
-        badge.classList.add('anchor-active');
-        giftTrigger.classList.add('unboxed');
+        badge.style.animation = 'none';
+        giftCard.style.animation = 'none';
 
-        // Reveal voucher
-        const voucherCard = document.getElementById('voucher-card');
-        voucherCard.classList.remove('hidden');
+        document.getElementById('voucher-card').classList.remove('hidden');
         document.getElementById('stamp-claim-btn').classList.add('pulse-active');
-
-        // Smooth scroll focus to the revealed voucher
-        voucherCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         confetti({ particleCount: 100, spread: 100, origin: { y: 0.6 }, colors: ['#CC0000', '#D4AF37', '#FFFFFF', '#FFC0CB', '#9B51E0'] });
       }
