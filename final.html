@@ -599,57 +599,6 @@
       transform: scale(1);
     }
 
-    /* --- VIDEO EMBED STYLING --- */
-    .video-section {
-      width: 100%;
-      max-width: 440px;
-      margin: 15px auto 5px auto;
-      background: rgba(255, 255, 255, 0.9);
-      border: 2px dashed var(--rose-gold);
-      border-radius: 14px;
-      padding: 15px;
-      box-shadow: 0 8px 20px rgba(221, 167, 165, 0.2);
-      text-align: center;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      pointer-events: none;
-    }
-
-    .video-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .video-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--burgundy);
-      margin-bottom: 10px;
-    }
-
-    .video-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      height: 0;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 10px;
-    }
-
     @keyframes floatLeft {
       0% { transform: translateY(0) rotate(-4deg); }
       100% { transform: translateY(-8deg) rotate(3deg); }
@@ -965,7 +914,7 @@
             <div class="credential-details">
               <div class="detail-row"><span>EVENT:</span><span>2026 BIRTHDAY GP</span></div>
               <div class="detail-row"><span>DATE:</span><span>SEPTEMBER 16</span></div>
-              <div class="detail-row"><span>NAME:</span><span>FILO DONOFRIO</span></div>
+              <div class="detail-row"><span>NAME:</span><span>FILO</span></div>
             </div>
             <div class="barcode-container">
               <div class="fake-barcode"></div>
@@ -1041,15 +990,6 @@
         <div class="wish-reveal-msg" id="wish-reveal-msg">
           May all your sweetest wishes come true, today & always... 💖
         </div>
-
-        <!-- STRAY KIDS BIRTHDAY VIDEO EMBED -->
-        <div class="video-section" id="video-section">
-          <div class="video-title">🎵 Stray Kids Singing Happy Birthday!</div>
-          <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/0uUkmWAGrgs" title="Stray Kids singing happy birthday to Stay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-        </div>
-
       </div>
 
       <!-- NEXT BUTTON (Revealed after candles are clicked) -->
@@ -1122,7 +1062,7 @@
     </div>
 
     <footer class="page-footer">
-      Engineered with love by Andrew
+      Engineered with extra love.
     </footer>
   </div>
 
@@ -1300,7 +1240,6 @@
         });
 
         document.getElementById('wish-reveal-msg').classList.add('visible');
-        document.getElementById('video-section').classList.add('visible');
 
         // Reveal Next Button
         setTimeout(() => {
