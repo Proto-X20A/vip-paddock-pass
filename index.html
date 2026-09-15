@@ -316,6 +316,22 @@
       box-shadow: 0 15px 30px rgba(204, 0, 0, 0.4);
     }
 
+    /* --- ANIMATED GIFT BUTTON --- */
+    #to-voucher-btn {
+      animation: pulseGiftBtn 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseGiftBtn {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 10px 25px rgba(204, 0, 0, 0.3);
+      }
+      50% {
+        transform: scale(1.06);
+        box-shadow: 0 15px 35px rgba(204, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.5);
+      }
+    }
+
     /* --- SCREEN 2: CELEBRATION & CAKE --- */
     .cake-section {
       margin-top: 25px;
