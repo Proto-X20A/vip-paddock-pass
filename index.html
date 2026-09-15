@@ -946,7 +946,7 @@
     <!-- SCREEN 1: LANDING PASS -->
     <div id="screen-landing" class="section-screen">
       <div class="hero-header">
-        <h2>Scuderia Birthday Grand Prix</h2>
+        <h2>2026 Birthday Grand Prix</h2>
         <h1>VIP Paddock Access</h1>
       </div>
 
@@ -957,11 +957,11 @@
           <div class="pass-body">
             <div class="guest-photo-frame"><div class="guest-initials">21</div></div>
             <div>
-              <div class="guest-name">BIRTHDAY VIP PASS</div>
+              <div class="guest-name">EXCLUSIVE VIP PASS</div>
               <div class="access-tag">ALL AREAS ACCESS</div>
             </div>
             <div class="credential-details">
-              <div class="detail-row"><span>EVENT:</span><span>21ST BIRTHDAY GP</span></div>
+              <div class="detail-row"><span>EVENT:</span><span>2026 BIRTHDAY GP</span></div>
               <div class="detail-row"><span>DATE:</span><span>SEPTEMBER 16</span></div>
               <div class="detail-row"><span>NAME:</span><span>FILO DONOFRIO</span></div>
             </div>
@@ -1366,6 +1366,10 @@
     claimBtn.addEventListener('click', () => {
       claimBtn.style.animation = 'none';
       claimBtn.classList.remove('pulse-active');
+      claimBtn.textContent = '✓ SUCCESSFULLY CLAIMED';
+      claimBtn.style.background = '#008000';
+      claimBtn.style.cursor = 'default';
+      claimBtn.disabled = true;
 
       playHeartbeatAndSparkle();
       document.getElementById('stamp-seal').classList.add('stamped');
