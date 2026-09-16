@@ -429,20 +429,6 @@
       border-radius: 18px 18px 8px 8px;
       box-shadow: 0 10px 20px rgba(255, 183, 197, 0.4), inset 0 6px 0 #FFF;
       border: 2px solid #FFD1DC;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cake-name {
-      font-family: 'Alex Brush', cursive;
-      font-size: 1.6rem;
-      color: var(--burgundy);
-      font-weight: 600;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
-      margin-top: 8px;
-      z-index: 4;
-      pointer-events: none;
     }
 
     .drip-layer {
@@ -466,19 +452,13 @@
       border: 2px solid #FFD1DC;
     }
 
-    /* --- Sparkles perfectly aligned with candles --- */
     .sparkles {
       position: absolute;
-      bottom: 148px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 74px; /* matches the candles-group width footprint */
+      top: -10px;
+      width: 100%;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      justify-content: space-around;
       font-size: 0.8rem;
-      z-index: 6;
-      pointer-events: none;
     }
 
     .candles-group {
@@ -1030,7 +1010,7 @@
           </div>
 
           <div class="cake-container" id="cake-container">
-            <div class="sparkles"><span>✨</span><span>💖</span><span>✨</span></div>
+            <div class="sparkles">✨ 💖 ✨</div>
             <div class="candles-group">
               <div class="candle">
                 <div class="wick"></div>
@@ -1044,10 +1024,7 @@
               </div>
             </div>
             <div class="cake-tier-top"><div class="drip-layer"></div></div>
-            <div class="cake-tier-bottom">
-              <div class="drip-layer"></div>
-              <div class="cake-name">Filo</div>
-            </div>
+            <div class="cake-tier-bottom"><div class="drip-layer"></div></div>
           </div>
 
           <div class="bouquets-side right-bouquets">
