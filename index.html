@@ -298,10 +298,10 @@
       background: linear-gradient(135deg, var(--rosso-corsa) 0%, #A00000 100%);
       color: var(--white-pure);
       border: none;
-      padding: 16px 40px;
-      font-size: 1rem;
+      padding: 16px 30px;
+      font-size: 0.9rem;
       font-weight: 800;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       border-radius: 50px;
       cursor: pointer;
       box-shadow: 0 10px 25px rgba(204, 0, 0, 0.3);
@@ -314,6 +314,22 @@
     .start-btn:hover {
       transform: translateY(-3px) scale(1.03);
       box-shadow: 0 15px 30px rgba(204, 0, 0, 0.4);
+    }
+
+    /* --- ANIMATED ENTER BUTTON --- */
+    .pulse-enter-btn {
+      animation: pulseEnterBtn 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseEnterBtn {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 10px 25px rgba(204, 0, 0, 0.3);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 15px 35px rgba(204, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.4);
+      }
     }
 
     /* --- ANIMATED GIFT BUTTON --- */
@@ -472,7 +488,7 @@
       bottom: 148px;
       left: 50%;
       transform: translateX(-50%);
-      width: 74px; /* matches the candles-group width footprint */
+      width: 74px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -653,7 +669,7 @@
     .video-container {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      padding-bottom: 56.25%;
       height: 0;
       border-radius: 10px;
       overflow: hidden;
@@ -995,8 +1011,9 @@
         </div>
       </div>
 
-      <button class="start-btn" id="enter-paddock-btn">
-        <span>START ENGINE & ENTER</span> <span>🏎️</span>
+      <!-- UPDATED BUTTON WITH ANIMATION AND TEXT -->
+      <button class="start-btn pulse-enter-btn" id="enter-paddock-btn">
+        <span>CLICK HERE TO ENTER PADDOCK AREA</span> <span>🏎️</span>
       </button>
     </div>
 
