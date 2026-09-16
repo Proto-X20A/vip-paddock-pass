@@ -353,7 +353,7 @@
       padding: 8px 24px;
       border-radius: 40px;
       box-shadow: 0 8px 20px rgba(230, 92, 123, 0.25);
-      margin-bottom: 6px;
+      margin-bottom: 6px; /* Reduced spacing */
     }
 
     .strawberry-title {
@@ -391,7 +391,7 @@
       padding: 10px 22px;
       border-radius: 30px;
       box-shadow: 0 6px 18px rgba(230, 92, 123, 0.4);
-      margin: 6px 0 8px 0;
+      margin: 6px 0 8px 0; /* Reduced spacing */
       animation: pulseBadge 1.5s ease-in-out infinite;
       border: 1.5px solid var(--white-pure);
       transition: opacity 0.4s ease;
@@ -404,7 +404,7 @@
       align-items: center;
       justify-content: center;
       gap: 15px;
-      margin-top: 0px;
+      margin-top: 0px; /* Reduced spacing */
       width: 100%;
       min-height: 180px;
     }
@@ -1046,7 +1046,7 @@
         <div class="video-section" id="video-section">
           <div class="video-title">🎵 Stray Kids Singing Happy Birthday!</div>
           <div class="video-container">
-            <iframe id="bday-video" src="" title="Stray Kids singing happy birthday to Stay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/0uUkmWAGrgs" title="Stray Kids singing happy birthday to Stay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
 
@@ -1291,9 +1291,6 @@
         candlesBlown = true;
 
         document.getElementById('bday-heading').classList.add('visible');
-
-        // Autoplay the YouTube video right when candles are blown
-        document.getElementById('bday-video').src = "https://www.youtube.com/embed/0uUkmWAGrgs?autoplay=1";
 
         const bouquetIds = ['bq-1', 'bq-2', 'bq-3', 'bq-4'];
         bouquetIds.forEach((id, index) => {
